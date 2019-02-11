@@ -1,0 +1,15 @@
+export default {
+	layoutPadding: '0.1rem 1.2rem',
+	layoutPaddingVertical: '0.1rem',
+	layoutPaddingHorizontal: '1.2rem',
+	layoutMargin: '1.5rem 0.5rem',
+	layoutMarginVertical: '0.5rem',
+	layoutMarginHorizontal: '1.5rem',
+	elementPadding: '0.1rem 1rem',
+	elementPaddingVertical: '0.1rem',
+	elementPaddingHorizontal: '1rem',
+	doubleElementPadding: '2rem',
+	elementMargin: '0.5rem 0.25rem',
+	elementMarginVertical: '0.5rem',
+	elementMarginHorizontal: '0.25rem',
+};

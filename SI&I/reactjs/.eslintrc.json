@@ -1,0 +1,41 @@
+{
+    "env": {
+        "es6": true,
+        "node": true,
+		"mocha": true,
+		"browser": true
+    },
+    "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:flowtype/recommended"],
+    "parserOptions": {
+        "sourceType": "module"
+    },
+	"plugins": ["react", "flowtype"],
+    "parser": "babel-eslint",
+	"globals": {
+        "__DEV__": false,
+        "__NATIVE__": false,
+        "REGION": false,
+        "AUTH_SERVER": false,
+        "APP_SERVER": false,
+        "MAP_SERVER": false,
+        "MAP_SERVICE": false,
+        "Promise": true
+    },
+    "rules": {
+        "indent": [
+            "error",
+            "tab"
+        ],
+        "quotes": [
+            "error",
+            "single"
+        ],
+        "semi": [
+            "error",
+            "always"
+        ],
+		"react/jsx-uses-react": "error",
+    	"react/jsx-uses-vars": "error",
+		"react/no-find-dom-node": "off"
+    }
+}
