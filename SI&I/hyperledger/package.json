@@ -9,7 +9,9 @@
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/block-track.bna",
     "pretest": "npm run lint",
     "lint": "eslint .",
-    "test": "nyc mocha -t 0 test/*.js && cucumber-js"
+    "test": "nyc mocha -t 0 test/*.js && cucumber-js",
+    "init": "composer network install --card PeerAdmin@hlfv1 --archiveFile block-track@0.0.1.bna && composer network start --networkName block-track --networkVersion 0.0.1 --networkAdmin admin --networkAdminEnrollSecret adminpw --card PeerAdmin@hlfv1 --file networkadmin.card",
+    "start": "composer-rest-server -c admin@block-track -n never -u true -d n -w true"
   },
   "keywords": [
     "composer",
