@@ -1,50 +1,56 @@
 namespace org.hyperledger_composer.scms
-enum ProductDesc {
- o Shoes
- o Socks
- o Belts
- o SportsShoes
- o Flipflops
-}
-enum ProductSize {
- o SMALL
- o MEDIUM
- o LARGE
-}
-asset Product identified by productId {
- o String productId
- o String producttype
- o ProductSize size
- o ProductDesc description
+asset SparePart identified by id {
+ o String id
+ o String displayName
+ o String currentLocation
+ o String category
+ o String OEM
+ o String modelNo
+ o String certOfOrigin
+ o String countryOfOrigin
+ o DateTime firstUseDate
+ o String condition
+ o String accumulateEOH
  --> Participant owner
- --> Participant issuer
 }
-participant Customer identified by email {
- o String email
- o String firstName
- o String lastName
- o String type
+
+asset Contract identified by id {
+ o String id
+ o String requestorStatus
+ o String respondorStatus
+ o String amiToken
+ o String paymentToRespondor
+ --> Participant requestorProjectSite
+ --> Participant respondorProjectSite
 }
-participant Manufacturer identified by email {
- o String email
- o String firstName
- o String lastName
- o String type
+
+asset SparePartToProjectSite identified by id {
+ o String id
+ o String sparePartId
+ o Integer noOfAvailable
+ --> Participant ownerProjectSite
 }
-participant Distributor identified by email {
- o String email
- o String firstName
- o String lastName
- o String type
+
+transaction UpdateReqContract {
+ o String newStatus
+ --> Contract contract
 }
-participant Retailer identified by email {
- o String email
- o String firstName
- o String lastName
- o String type
+
+transaction UpdateRespContract {
+ o String newStatus
+ --> Contract contract
 }
-transaction MoveProduct {
- --> Product product
- --> Participant issuer
- --> Participant newOwner
+
+transaction UpdateAvailNoOfSparePartToProjSite {
+ o Integer noOfAvailable
+ --> SparePartToProjectSite sparePartToProjectSite
+}
+
+participant ProjectSite identified by id {
+ o String id
+ o String address
+ o String name
+ o String powerTech
+ o String contactName
+ o String contactTel
 }

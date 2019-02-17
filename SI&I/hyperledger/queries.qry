@@ -1,0 +1,28 @@
+
+query getContractByProjSite {
+  description: "Query the related contract by project site"
+  statement:
+      SELECT org.hyperledger_composer.scms.Contract
+  		WHERE (requestorProjectSite == _$projSite OR respondorProjectSite == _$projSite)
+}
+
+query getReqContractByProjSiteAndStatus {
+  description: "Query the related requestor contract by project site and status"
+  statement:
+      SELECT org.hyperledger_composer.scms.Contract
+  		WHERE (respondorProjectSite == _$projSite AND respondorStatus == _$requestorStatus)
+}
+
+query getRespContractByProjSiteAndStatus {
+  description: "Query the related respondor contract by project site and status"
+  statement:
+      SELECT org.hyperledger_composer.scms.Contract
+  		WHERE (requestorProjectSite == _$projSite AND requestorStatus == _$requestorStatus)
+}
+
+query getSparePartToProjectSiteBySparePartId {
+  description: "Query the available spare part list"
+  statement:
+      SELECT org.hyperledger_composer.scms.SparePartToProjectSite
+  		WHERE (sparePartId == _$sparePartId)
+}
