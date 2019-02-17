@@ -71,7 +71,8 @@ export const styles = theme => ({
 	},
 	insertButtonDiv: {
 		display: 'flex',
-		alignItems: 'center'
+		alignItems: 'center',
+		width: '20%',
 	},
 	searchText: {
 		paddingTop: '4px',

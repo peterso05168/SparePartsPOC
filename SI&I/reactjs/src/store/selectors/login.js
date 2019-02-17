@@ -1,19 +1,19 @@
 // @flow
 import createImmutableSelector from '../../utils/createImmutableSelector';
 import {
-	inputEmail,
+	inputUsername,
 	inputPassword,
 	login
 } from '../../actions';
 
 export const selectProps = createImmutableSelector(
-	state => state.getIn(['login', 'email']),
+	state => state.getIn(['login', 'username']),
 	state => state.getIn(['login', 'password']),
 	(email, password) => ({ email, password })
 );
 
 export const selectActions = (dispatch: any) => ({
-	login: (email: string, password: string) => dispatch(login(email, password)),
-	inputEmail: (tempEmail: string) => dispatch(inputEmail(tempEmail)),
+	login: (username: string, password: string) => dispatch(login(username, password)),
+	inputEmail: (tempUsername: string) => dispatch(inputUsername(tempUsername)),
 	inputPassword: (tempPassword: string) => dispatch(inputPassword(tempPassword)),
 });

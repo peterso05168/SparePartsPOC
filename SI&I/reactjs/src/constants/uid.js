@@ -1,8 +1,9 @@
 export default {
-	Customer: 'email',
-	Distributor: 'email',
-	Manufacturer: 'email',
-	Retailer: 'email',
-	Product: 'productId',
-	MoveProduct: 'transactionId'
+	ProjectSite: 'id',
+	Contract: 'id',
+	SparePart: 'id',
+	SparePartToProjectSite: 'id',
+	UpdateAvailNoOfSparePartToProjSite: 'transactionId',
+	UpdateReqContract: 'transactionId',
+	UpdateRespContract: 'transactionId'
 };

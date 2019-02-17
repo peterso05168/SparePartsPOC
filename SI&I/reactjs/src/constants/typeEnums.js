@@ -1,8 +1,9 @@
 export default {
-	Customer: 'Customer',
-	Distributor: 'Distributor',
-	Manufacturer: 'Manufacturer',
-	Retailer: 'Retailer',
-	Product: 'Product',
-	MoveProduct: 'MoveProduct'
+	ProjectSite: 'ProjectSite',
+	Contract: 'Contract',
+	SparePart: 'SparePart',
+	SparePartToProjectSite: 'SparePartToProjectSite',
+	UpdateAvailNoOfSparePartToProjSite: 'UpdateAvailNoOfSparePartToProjSite',
+	UpdateReqContract: 'UpdateReqContract',
+	UpdateRespContract: 'UpdateRespContract'
 };

@@ -46,6 +46,7 @@ export const styles = theme => ({
 	},
 	margin: {
 		margin: theme.spacing.unit,
+		width: '8%'
 	},
 	purple: {
 		color: theme.palette.getContrastText(purple[500]),

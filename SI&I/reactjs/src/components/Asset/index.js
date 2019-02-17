@@ -13,7 +13,8 @@ import { connect } from 'react-redux';
 
 import { styles } from './makeup';
 import { selectProps, selectActions } from '../../store/selectors/asset';
-import RecordCard from '../common/RecordCard';
+
+import RecordCard from '../common/RecordCard/';
 import getUID from '../../constants/uid';
 
 const connector = connect(selectProps, selectActions);
@@ -83,7 +84,7 @@ class Asset extends React.Component<AssetProps> {
 			handleRefresh, loading, assets, typeEnums, isNew, newAsset } = this.props;
 		console.log('asset render');
 		return (
-			<div className={classes.root}>
+			<div>
 				<div className={classes.row}>
 					<FormControl className={classes.formControl}>
 						<InputLabel htmlFor="type">Type</InputLabel>

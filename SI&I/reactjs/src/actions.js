@@ -6,8 +6,11 @@ login.failure = createAction('LOGIN_FAILURE', 'error');
 
 export const logout = createAction('LOGOUT');
 
-export const inputEmail = createAction('INPUT_EMAIL', 'email');
+//login
+export const inputUsername = createAction('INPUT_USERNAME', 'username');
 export const inputPassword = createAction('INPUT_PASSWORD', 'password');
+
+export const setDisplayName = createAction('SET_DISPLAY_NAME', 'displayName');
 
 //asset
 export const setSelectedAsset = createAction('SET_SELECTED_ASSET', 'selectedType');

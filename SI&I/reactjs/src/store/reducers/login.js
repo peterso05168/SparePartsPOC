@@ -1,14 +1,16 @@
 import createReducer from 'utils/createReducer';
 import { Map } from 'immutable';
 
-import { inputEmail, inputPassword } from 'actions';
+import { inputUsername, inputPassword, setDisplayName } from '../../actions';
 
 const initialState = new Map({
-	email: '',
+	username: '',
+	displayName: '',
 	password: ''
 });
 
 export default createReducer(initialState, {
-	[inputEmail.type]: (state, { payload }) => state.set('email', payload.email),
+	[inputUsername.type]: (state, { payload }) => state.set('username', payload.username),
 	[inputPassword.type]: (state, { payload }) => state.set('password', payload.password),
+	[setDisplayName.type]: (state, { payload }) => state.set('displayName', payload.displayName),
 });

@@ -11,9 +11,9 @@ import Button from '@material-ui/core/Button';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import ReactJson from 'react-json-view';
-import getUID from '../../constants/uid';
+import getUID from '../../../constants/uid';
 
-import { styles } from './RecordCardMarkUp';
+import { styles } from './makeup';
 
 type RecordCardProps = {
 	classes: object,
@@ -28,7 +28,7 @@ type RecordCardProps = {
 class RecordCard extends React.Component<RecordCardProps> {
 
 	onChange = ({ updated_src }) => {
-		const { recordId, onJSONChange, isNew } = this.props; 
+		const { recordId, onJSONChange, isNew } = this.props;
 		onJSONChange(updated_src, recordId, isNew);
 	}
 
@@ -66,9 +66,9 @@ class RecordCard extends React.Component<RecordCardProps> {
 									>
                             Update
 									</Button>
-									<Button 
+									<Button
 										variant="contained" 
-										color="secondary" 
+										color="secondary"
 										className={classNames(classes.margin, classes.purple)}
 										onClick={() => onSubmit('DELETE', recordId)}
 									>
