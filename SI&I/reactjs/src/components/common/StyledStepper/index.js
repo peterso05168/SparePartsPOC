@@ -10,13 +10,18 @@ import Typography from '@material-ui/core/Typography';
 import { styles } from './makeup';
 
 function getSteps () {
-	return ['Pending', 'Approved', 'Received', 'Tested'];
+	return ['Pending', 'Approved', 'Contract Signed', 'Received By Requester', 'Tested by Requester',
+		'Arranged New part', 'Received By Respondor', 'Tested by Respondor'];
 }
 
 const buttonLabel = {
-	1: 'Approve',
-	2: 'Deliver',
-	3: 'Finish Test'
+	1: 'Approve (Responder)',
+	2: 'Sign & Deliver (Responder)',
+	3: 'Comfirm Received (Requestor)',
+	4: 'Finish Test (Requestor)',
+	5: 'Arrange and Deliver (Requestor)',
+	6: 'Comfirm Received (Responder)',
+	7: 'Finish Test (Responder)',
 };
 
 class HorizontalLabelPositionBelowStepper extends React.Component {
@@ -46,7 +51,6 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
 		const { classes } = this.props;
 		const steps = getSteps();
 		const { activeStep } = this.state;
-		console.log(activeStep);
 		return (
 			<div className={classes.root}>
 				<Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>

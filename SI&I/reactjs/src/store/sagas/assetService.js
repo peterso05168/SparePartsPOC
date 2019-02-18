@@ -1,6 +1,6 @@
 import { put, call } from 'redux-saga/effects';
 import APIService from './APIService';
-import { setRefresh, getAsset, postAsset, putAsset, deleteAsset, getAssetById } from '../../actions';
+import { getProjectSites, setRefresh, getAsset, postAsset, putAsset, deleteAsset, getAssetById } from '../../actions';
 
 export function* getAssetCaller ({ payload }) {
 	try {
@@ -8,6 +8,15 @@ export function* getAssetCaller ({ payload }) {
 		yield put(getAsset.success(assets));
 	} catch (error) {
 		yield put(getAsset.failure(error));
+	}
+}
+
+export function* getProjectSitesCaller ({ payload }) {
+	try {
+		const projectSites = yield call(APIService, payload);
+		yield put(getProjectSites.success(projectSites));
+	} catch (error) {
+		console.log(error);
 	}
 }
 

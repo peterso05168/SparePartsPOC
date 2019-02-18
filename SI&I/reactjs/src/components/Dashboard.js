@@ -4,11 +4,10 @@ import { Route, Switch, Redirect } from 'react-router';
 import { withStyles } from '@material-ui/core';
 
 import Asset from './Asset';
-import Transaction from './Transaction';
-import Participant from './Participant';
 import Navbar from './Navbar';
 
 import Mainboard from './Mainboard';
+import NewRequest from './NewRequest/';
 
 const styles = theme => ({
 	root: {
@@ -36,11 +35,10 @@ class Main extends PureComponent<any> {
 				<main className={classes.content}>
 					<div className={classes.toolbar} />
 					<Switch>
-						<Redirect exact from="/" to="/asset" />
+						<Redirect exact from="/" to="/mainboard" />
 						<Route path="/asset" component={Asset} />
-						<Route path="/transaction" component={Transaction} />
-						<Route path="/participant" component={Participant} /> 
-						<Route path="/mainboard" component={Mainboard} /> 
+						<Route path="/mainboard" component={Mainboard} />
+						<Route path="/newRequest" component={NewRequest} />
 					</Switch>
 				</main>
 			</div>

@@ -17,6 +17,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { connect } from 'react-redux';
 
@@ -30,9 +31,13 @@ type NavBarProps = {
 	classes: object,
 	username: string,
 	displayName: string,
+	loading: boolean, 
+	initialized: boolean, 
+	projectSiteList: object,
 	goto: (route: string) => any,
 	setUsername: (username: string) => any,
 	setDisplayName: (displayName: string) => any,
+	getProjectSites: () => any
 }
 
 class NavBar extends React.Component<NavBarProps> {
@@ -41,10 +46,6 @@ class NavBar extends React.Component<NavBarProps> {
 		super();
 		this.state = {
 			dropdownLabel: 'company',
-			dropdownList: {
-				companyA : 'Company A',
-				companyB : 'Company B'
-			},
 			open: false,
 			buttonList: {
 				mainBoard: 'Main Board',
@@ -53,16 +54,22 @@ class NavBar extends React.Component<NavBarProps> {
 		};
 	}
 
+	handleSelectDrawer = (route) => {
+		const { goto } = this.props;
+		goto(route);
+		this.handleDrawerAction();
+	}
+
 	handleDrawerAction = () => {
 		const { open } = this.state;
 		this.setState({ open: !open });
 	}
 
 	handleUserChange = (value) => {
-		const { dropdownList } = this.state;
+		const { projectSiteList } = this.props;
 		const { setUsername, setDisplayName } = this.props;
 		setUsername(value);
-		setDisplayName(dropdownList[value]);
+		setDisplayName(projectSiteList[value]['name']);
 	}
 
 	// handleMenu = (event) => {
@@ -73,10 +80,15 @@ class NavBar extends React.Component<NavBarProps> {
 	// 	this.setState({ anchorEl: null });
 	// };
 
+	componentDidMount () {
+		const { initialized, getProjectSites } = this.props;
+		if(!initialized) getProjectSites('GET', 'ProjectSite');
+	}
+
 	render () {
-		const { classes, username, displayName, goto } = this.props;
+		const { classes, username, displayName, loading, projectSiteList } = this.props;
 		const { buttonList,
-			dropdownLabel, dropdownList, open } = this.state;
+			dropdownLabel, open } = this.state;
 		console.log('navbar render');
 		return (
 			<div >
@@ -96,10 +108,19 @@ class NavBar extends React.Component<NavBarProps> {
 							<StyleDropdown
 								dropdownLabel={dropdownLabel}
 								seletedValue={username}
-								dropdownList={dropdownList}
+								dropdownList={projectSiteList}
 								handleChange={this.handleUserChange}
 							/>
 						</div>
+						{
+							loading ? 
+								<div style={{ flexGrow: 1 }}>
+									<CircularProgress 
+										style={{color: '#FFFFFF'}}
+										disableShrink /> 
+								</div>
+								: null
+						}
 						<Typography variant="h5" color="inherit" className={classes.grow}>
 							Spare Parts
 						</Typography>
@@ -139,7 +160,7 @@ class NavBar extends React.Component<NavBarProps> {
 					<Divider />
 					<List>
 						{Object.keys(buttonList).map((text) => (
-							<ListItem button key={buttonList[text]} onClick={() => goto(`/${text}`)}>
+							<ListItem button key={buttonList[text]} onClick={() => this.handleSelectDrawer(`/${text}`)}>
 								<ListItemIcon>{text == 'mainBoard' ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
 								<ListItemText primary={buttonList[text]} />
 							</ListItem>

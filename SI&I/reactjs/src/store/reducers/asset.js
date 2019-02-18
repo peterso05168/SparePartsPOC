@@ -42,7 +42,6 @@ export default createReducer(initialState, {
 	),
 	[insertMode.type]: (state) => {
 		const selectedType = state.get('selectedType');
-		const isNew = state.get('isNew');
 		return selectedType ? state.set('isNew', true).set('newAsset', fromJS(postBody[selectedType])): state;
 	},
 	[setRefresh.type]: (state) => state.set('needRefresh', true).set('isNew', false),

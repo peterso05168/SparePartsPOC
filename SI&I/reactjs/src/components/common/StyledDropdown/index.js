@@ -23,15 +23,7 @@ type StyledDropdownProps = {
 
 class StyledDropdown extends React.Component<StyledDropdownProps> {
 
-	constructor() {
-		super();
-		this.state = {
-			labelWidth: 0
-		};
-	}
-
 	render () {
-		const { labelWidth } = this.state;
 		const { dropdownLabel, dropdownList, seletedValue, classes, helperText, handleChange} = this.props;
 		const { root, formControl, selectEmpty } = classes;
 		return (
@@ -50,7 +42,7 @@ class StyledDropdown extends React.Component<StyledDropdownProps> {
 				>
 					{
 						Object.keys(dropdownList).map((key) => {
-							return (<MenuItem key={dropdownList[key]} value={key}>{dropdownList[key]}</MenuItem>);
+							return (<MenuItem key={key} value={key}>{dropdownList[key]['name']}</MenuItem>);
 						})
 					}
 				</Select>

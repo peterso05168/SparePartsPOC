@@ -1,11 +1,15 @@
 import { takeEvery, fork } from 'redux-saga/effects';
-import { getAssetCaller, postAssetCaller, putAssetCaller, deleteAssetCaller } from './assetService';
-import { getAsset, postAsset, putAsset, deleteAsset, getAssetById } from '../../actions';
+import { getProjectSitesCaller, getAssetCaller, postAssetCaller, putAssetCaller, deleteAssetCaller } from './assetService';
+import { getProjectSites, getAsset, postAsset, putAsset, deleteAsset, getAssetById } from '../../actions';
 
 
 export default function* assetSaga () {
 	yield fork(function* handleGetAsset () {
 		yield takeEvery(getAsset.type, getAssetCaller);
+	});
+
+	yield fork(function* handleGetProjectSites () {
+		yield takeEvery(getProjectSites.type, getProjectSitesCaller);
 	});
 
 	yield fork(function* handlePostAsset () {
