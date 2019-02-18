@@ -11,7 +11,6 @@ asset SparePart identified by id {
  o DateTime firstUseDate
  o String condition
  o String accumulateEOH
- --> Participant owner
 }
 
 asset Contract identified by id {
