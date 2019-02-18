@@ -68,6 +68,54 @@ class Asset extends React.Component<AssetProps> {
 		handleSearch(searchById);
 	}
 
+	componentDidMount() {
+		try {
+			const { handleInsert, handleUpdate, handleDelete, selectedType } = this.props;
+			var projectSiteSampleData = {};
+			for(var i = 0; i < 2; i++){
+				projectSiteSampleData = {
+					'$class': 'org.hyperledger_composer.scms.ProjectSite',
+					'id': '' + i,
+					'address': 'Addr ' + i,
+					'name': 'Project Site '+ i,
+					'powerTech': 'powerTech ' + i,
+					'contactName': 'ProjectSite contact ' + i,
+					'contactTel': '98765566'
+				};
+				handleInsert('POST', 'ProjectSite', projectSiteSampleData);
+			}
+			for( i = 0; i < 3; i++){
+				var sparePartSampleData = {
+					'$class': 'org.hyperledger_composer.scms.SparePart',
+					'id': '' + i,
+					'displayName': 'Spare Part ' + i,
+					'currentLocation': 'Site ' + i,
+					'category': 'Cat' + i,
+					'OEM': '' + i,
+					'modelNo': '123-' + i,
+					'certOfOrigin': 'Y',
+					'countryOfOrigin': 'China',
+					'firstUseDate': '2019-02-18T13:45:39.874Z',
+					'condition': 'G',
+					'accumulateEOH': '10000'
+				};
+				handleInsert('POST', 'SparePart', sparePartSampleData);
+			}
+			for( i = 1; i < 3; i++){
+				var sparePartToProjSiteSampleData = {
+					'$class': 'org.hyperledger_composer.scms.SparePartToProjectSite',
+					'id': '' + i,
+					'sparePartId': '' + i,
+					'noOfAvailable': i + 1,
+					'ownerProjectSite': 'org.hyperledger_composer.scms.ProjectSite#0'
+				};
+				handleInsert('POST', 'SparePartToProjectSite', sparePartToProjSiteSampleData);
+			}
+		}catch(e){
+			console.log(e);
+		}		
+	}
+	
 	componentDidUpdate() {
 		const { selectedType, needRefresh, handleClearError, getSelectedTypeAsset, error } = this.props;
 		if (error) {
@@ -87,7 +135,7 @@ class Asset extends React.Component<AssetProps> {
 			<div>
 				<div className={classes.row}>
 					<FormControl className={classes.formControl}>
-						<InputLabel htmlFor="type">Type</InputLabel>
+						<InputLabel htmlFor='type'>Type</InputLabel>
 						<Select
 							value={selectedType}
 							onChange={(event) => this.onSelecteType(event.target.value)}
@@ -106,20 +154,20 @@ class Asset extends React.Component<AssetProps> {
 					</FormControl>
 					<div className={classes.searchText}>
 						<TextField
-							id="standard-search"
-							label="Search"
-							type="search"
+							id='standard-search'
+							label='Search'
+							type='search'
 							className={classes.textField}
-							margin="normal"
+							margin='normal'
 							value={searchById}
 							onChange={this.onSearch}
 						/>
 					</div>
 					<div className={classes.insertButtonDiv}>
-						<Button variant="contained" color="secondary" onClick={handleRefresh} className={classNames(classes.margin)}>
+						<Button variant='contained' color='secondary' onClick={handleRefresh} className={classNames(classes.margin)}>
 							Refresh
 						</Button>
-						<Button variant="contained" color="primary" onClick={handleInsertMode} className={classNames(classes.margin)}>
+						<Button variant='contained' color='primary' onClick={handleInsertMode} className={classNames(classes.margin)}>
 							New
 						</Button>
 					</div>
