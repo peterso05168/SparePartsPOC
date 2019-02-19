@@ -57,7 +57,11 @@ export default createReducer(initialState, {
 	[postContract.success.type]: (state, { payload: { data } }) => handleSuccessfulResponse(state, data, 'post', 'Contract'),
 	[postContract.failure.type]: (state, { payload }) => state.set('error', payload.error)
 		.set('loading', false),
-	[setSelectedSparePart.type]: (state, { payload: { id } }) => state.set('selectedSparePart', id),
-	[setSelectedProjectSite.type]: (state, { payload: { id } }) => state.set('selectedProjectSite', id),
+	[setSelectedSparePart.type]: (state, { payload: { id } }) => 
+		state.set('selectedSparePart', id)
+			.set('selectedProjectSite', '')
+			.set('selectedQuantity', 0),
+	[setSelectedProjectSite.type]: (state, { payload: { id } }) => 
+		state.set('selectedProjectSite', id).set('selectedQuantity', 0),
 	[setSelectedQuantity.type]: (state, { payload: { quantity } }) => state.set('selectedQuantity', quantity),
 });

@@ -8,7 +8,7 @@ export const styles = {
 	},
 	noSelectionTitle: {
 		userSelect: 'none',
-		marginBottom: '5px'
+		marginBottom: '7px'
 	},
 	noSelection: {
 		userSelect: 'none'

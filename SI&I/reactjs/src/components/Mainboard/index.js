@@ -13,7 +13,7 @@ import { selectProps, selectActions } from '../../store/selectors/mainboard';
 import StyledCard from '../common/StyledCard/';
 
 import { styles } from './makeup';
-import { requestorKeys, respondorKeys} from '../../constants/sampleContract';
+import { requestorKeys, respondorKeys } from '../../constants/sampleContract';
 
 const connector = connect(selectProps, selectActions);
 
@@ -25,8 +25,11 @@ type MainBoardProps = {
 	loading: boolean,
 	requestorContractList: object,
 	respondorContractList: object,
+	projectSiteList: object,
+	sparePartList: object,
 	handleClearError: () =>  any,
-	getContract: (method: string, path: string, query: object) => any
+	getContract: (method: string, path: string, query: object) => any,
+	updateStatus: (method: string, path: string, body: string) => any
 }
 
 class MainBoard extends React.Component<MainBoardProps> {
@@ -65,8 +68,9 @@ class MainBoard extends React.Component<MainBoardProps> {
 	}
 
 	render () {
-		const { classes, requestorContractList, respondorContractList, loading } = this.props;
-		console.log('MainBoard render');
+		const { classes, requestorContractList, respondorContractList, loading,
+			updateStatus, projectSiteList, sparePartList } = this.props;
+		// console.log('MainBoard render');
 		return (
 			<div className={classes.wrapper}>
 				<div className={classes.divider} >
@@ -91,6 +95,11 @@ class MainBoard extends React.Component<MainBoardProps> {
 					Object.keys(respondorContractList).map((value, index) =>(
 						<div key={index}>
 							<StyledCard 
+								sparePartName={sparePartList[respondorContractList[value]['sparePartId']]['displayName']}
+								projectSiteName={projectSiteList[respondorContractList[value]['requestorProjectSite'].split('#')[1]]['name']}
+								updateStatus={updateStatus}
+								stepperLabel={'responder'}
+								handleStepNext={updateStatus}
 								title={`Contract Id: ${value}`} 
 								content={respondorContractList[value]} 
 								contentKeys={respondorKeys}/>
@@ -112,15 +121,20 @@ class MainBoard extends React.Component<MainBoardProps> {
 						<Divider />
 					</div>
 				</div>
-				{
+				{/* {
 					loading ?
 						<LinearProgress />
 						: null
-				}
+				} */}
 				{
 					Object.keys(requestorContractList).map((value, index) => (
 						<div key={index}>
 							<StyledCard
+								sparePartName={sparePartList[requestorContractList[value]['sparePartId']]['displayName']}
+								projectSiteName={projectSiteList[requestorContractList[value]['respondorProjectSite'].split('#')[1]]['name']}
+								updateStatus={updateStatus}
+								stepperLabel={'requestor'}
+								handleStepNext={updateStatus}
 								title={`Contract Id: ${value}`}
 								content={requestorContractList[value]}
 								contentKeys={requestorKeys} />
