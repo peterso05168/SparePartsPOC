@@ -10,14 +10,14 @@ query getReqContractByProjSiteAndStatus {
   description: "Query the related requestor contract by project site and status"
   statement:
       SELECT org.hyperledger_composer.scms.Contract
-  		WHERE (respondorProjectSite == _$projSite AND respondorStatus == _$requestorStatus)
+  		WHERE (respondorProjectSite == _$projSite AND requestorStatus == _$requestorStatus)
 }
 
 query getRespContractByProjSiteAndStatus {
   description: "Query the related respondor contract by project site and status"
   statement:
       SELECT org.hyperledger_composer.scms.Contract
-  		WHERE (requestorProjectSite == _$projSite AND requestorStatus == _$requestorStatus)
+  		WHERE (requestorProjectSite == _$projSite AND respondorStatus == _$respondorStatus)
 }
 
 query getSparePartToProjectSiteBySparePartId {

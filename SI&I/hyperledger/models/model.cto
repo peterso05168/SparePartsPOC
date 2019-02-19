@@ -15,7 +15,7 @@ asset SparePart identified by id {
 
 asset Contract identified by id {
  o String id
- o Integer sparePartId
+ o String sparePartId
  o Integer noOfSparePart
  o String requestorStatus
  o String respondorStatus

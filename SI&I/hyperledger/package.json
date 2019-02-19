@@ -3,7 +3,7 @@
     "composer": "^0.20.7"
   },
   "name": "block-track",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A basic supply chain management system",
   "scripts": {
     "prepublish": "mkdirp ./dist && composer archive create --sourceType dir --sourceName . -a ./dist/block-track.bna",
