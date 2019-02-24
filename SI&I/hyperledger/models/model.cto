@@ -21,6 +21,7 @@ asset Contract identified by id {
  o String respondorStatus
  o String amiToken
  o String paymentToRespondor
+ o String isTerminated
  --> Participant requestorProjectSite
  --> Participant respondorProjectSite
 }
@@ -42,9 +43,14 @@ transaction UpdateRespContract {
  --> Contract contract
 }
 
+transaction terminatedContract {
+ --> Contract contract
+}
+
 transaction UpdateAvailNoOfSparePartToProjSite {
  o Integer noOfAvailable
- --> SparePartToProjectSite sparePartToProjectSite
+ o String sparePartId
+ --> ProjectSite projectSite
 }
 
 participant ProjectSite identified by id {

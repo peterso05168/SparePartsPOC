@@ -26,3 +26,10 @@ query getSparePartToProjectSiteBySparePartId {
       SELECT org.hyperledger_composer.scms.SparePartToProjectSite
   		WHERE (sparePartId == _$sparePartId)
 }
+
+query getSparePartToProjSiteByProjSiteAndSpartPart {
+  description: "Query the getSparePartToProjSite by project site and spart part"
+  statement:
+      SELECT org.hyperledger_composer.scms.SparePartToProjectSite
+  		WHERE (sparePartId == _$sparePartId AND ownerProjectSite == _$ownerProjectSite)
+}
