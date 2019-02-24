@@ -5,52 +5,13 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
-
+import { steps, stepperStatus } from '../../../constants/sampleContract';
 import { styles } from './makeup';
 
-function getSteps () {
-	return ['Pending', 'Approved', 'Contract Signed', 'Received By Requester', 'Tested by Requester',
-		'Arranged New part', 'Received By Respondor', 'Tested by Respondor'];
-}
-
-const buttonLabel = {
-	1: 'Approve (Responder)',
-	2: 'Sign & Deliver (Responder)',
-	3: 'Comfirm Received (Requestor)',
-	4: 'Finish Test (Requestor)',
-	5: 'Arrange and Deliver (Requestor)',
-	6: 'Comfirm Received (Responder)',
-	7: 'Finish Test (Responder)',
-};
-
-class HorizontalLabelPositionBelowStepper extends React.Component {
-	state = {
-		activeStep: 1,
-	};
-
-	handleNext = () => {
-		this.setState(state => ({
-			activeStep: state.activeStep + 1,
-		}));
-	};
-
-	handleBack = () => {
-		this.setState(state => ({
-			activeStep: state.activeStep - 1,
-		}));
-	};
-
-	handleReset = () => {
-		this.setState({
-			activeStep: 0,
-		});
-	};
+class StyledStepper extends React.Component {
 
 	render () {
-		const { classes } = this.props;
-		const steps = getSteps();
-		const { activeStep } = this.state;
+		const { classes, label, activeStep, handleStepNext } = this.props;
 		return (
 			<div className={classes.root}>
 				<Stepper activeStep={activeStep} alternativeLabel className={classes.stepper}>
@@ -66,10 +27,11 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
 							<div>
 								<Button 
 									variant="contained" 
-									color="primary" 
-									onClick={this.handleNext} 
+									color="primary"
+									disabled={label != stepperStatus[activeStep.toString()].enable}
+									onClick={() => handleStepNext(stepperStatus[activeStep]['value'], stepperStatus[activeStep]['field'])} 
 									className={classes.progressButton}>
-									{buttonLabel[activeStep]}
+									{stepperStatus[activeStep]['label']}
 								</Button>
 							
 							</div>
@@ -81,8 +43,8 @@ class HorizontalLabelPositionBelowStepper extends React.Component {
 	}
 }
 
-HorizontalLabelPositionBelowStepper.propTypes = {
+StyledStepper.propTypes = {
 	classes: PropTypes.object,
 };
 
-export default withStyles(styles)(HorizontalLabelPositionBelowStepper);
+export default withStyles(styles)(StyledStepper);

@@ -3,7 +3,7 @@ import { Map, fromJS } from 'immutable';
 import _ from 'lodash';
 
 import getUID from '../../constants/uid';
-import { getContract, clearError } from '../../actions';
+import { getContract, clearError, postTransaction } from '../../actions';
 
 const initialState = new Map({
 	initialized: false,
@@ -26,9 +26,10 @@ const handleSuccessfulResponse = (state, data, method, type) => {
 
 export default createReducer(initialState, {
 	[clearError.type]: (state) => state.set('error', ''),
+	[postTransaction.type]: (state) => state.set('loading', true),
 	[getContract.type]: (state) => state.set('loading', true)
-		.set('requestorContractList', Map())
-		.set('respondorContractList', Map())
+		// .set('requestorContractList', Map())
+		// .set('respondorContractList', Map())
 		.set('initialized', true),
 	[getContract.success.type]: (state, { payload: { data, username } }) => {
 		let requestorContractList = {};
@@ -46,5 +47,7 @@ export default createReducer(initialState, {
 			.set('initialized', true);
 	},
 	[getContract.failure.type]: (state, { payload }) => state.set('error', payload.error)
+		.set('loading', false).set('initialized', true),
+	[postTransaction.failure.type]: (state, { payload }) => state.set('error', payload.error)
 		.set('loading', false).set('initialized', true)
 });

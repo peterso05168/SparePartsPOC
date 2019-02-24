@@ -65,3 +65,7 @@ export const setSelectedQuantity = createAction('SET_SELECTED_QUANTITY', 'quanti
 export const getContract = createAction('GET_CONTRACT', 'method', 'path', 'query');
 getContract.success = createAction('GET_CONTRACT_SUCCESS', 'data', 'username');
 getContract.failure = createAction('GET_CONTRACT_FAILURE', 'error');
+
+export const postTransaction = createAction('POST_TRANSACTION', 'method', 'path', 'body');
+postTransaction.success = createAction('POST_TRANSACTION_SUCCESS', 'data', 'username');
+postTransaction.failure = createAction('POST_TRANSACTION_FAILURE', 'error');
