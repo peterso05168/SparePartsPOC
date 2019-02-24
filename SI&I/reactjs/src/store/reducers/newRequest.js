@@ -3,7 +3,7 @@ import { Map, fromJS } from 'immutable';
 import _ from 'lodash';
 
 import getUID from '../../constants/uid';
-import { clearError, getSparePart, getSparePartToProjectSiteBySparePartId, postContract,
+import { inputUsername, clearError, getSparePart, getSparePartToProjectSiteBySparePartId, postContract,
 	setSelectedSparePart, setSelectedProjectSite, setSelectedQuantity } from '../../actions';
 
 const initialState = new Map({
@@ -12,8 +12,7 @@ const initialState = new Map({
 	selectedSparePart: '',
 	sparePartToProjectSiteList: Map(),
 	selectedProjectSite: '',
-	selectedQuantity: 0,
-	error: ''
+	selectedQuantity: 0
 });
 
 const getAction = {
@@ -28,6 +27,9 @@ const handleSuccessfulResponse = (state, data, method, type) => {
 };
 
 export default createReducer(initialState, {
+	[inputUsername.type]: (state, { payload }) => state.set('selectedSparePart', '')
+		.set('selectedProjectSite', '')
+		.set('selectedQuantity', 0),
 	[clearError.type]: (state) => state.set('error', ''),
 	[getSparePart.type]: (state) => state.set('loading', true),
 	[getSparePart.success.type]: (state, { payload: { data } }) => {
@@ -37,8 +39,7 @@ export default createReducer(initialState, {
 		});
 		return state.set('sparePartList', fromJS(returnSparePart)).set('loading', false);
 	},
-	[getSparePart.failure.type]: (state, { payload }) => state.set('error', payload.error)
-		.set('loading', false),
+	[getSparePart.failure.type]: (state, { payload }) => state.set('loading', false),
 	[getSparePartToProjectSiteBySparePartId.type]: (state) => state.set('loading', true)
 		.set('sparePartToProjectSiteList', Map()),
 	[getSparePartToProjectSiteBySparePartId.success.type]: (state, { payload: { data, username } }) => {

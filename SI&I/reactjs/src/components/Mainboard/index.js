@@ -10,7 +10,7 @@ import Button from '@material-ui/core/Button';
 import { connect } from 'react-redux';
 
 import { selectProps, selectActions } from '../../store/selectors/mainboard';
-import StyledCard from '../common/StyledCard/';
+import StyledCard from './StyledCard';
 
 import { styles } from './makeup';
 import { requestorKeys, respondorKeys } from '../../constants/sampleContract';
@@ -48,7 +48,11 @@ class MainBoard extends React.Component<MainBoardProps> {
 	}
 
 	componentDidMount () {
-		// this.handleGetContract();
+		const { username } = this.props;
+		const { oldUsername } = this.state;
+		this.handleGetContract();
+		if (oldUsername != username) 
+			this.setState({ oldUsername: username });
 	}
 
 	componentDidUpdate () {
@@ -61,10 +65,10 @@ class MainBoard extends React.Component<MainBoardProps> {
 		if (!initialized && username) {
 			this.handleGetContract();
 		}
-		if (error) {
-			alert(error);
-			handleClearError();
-		}
+		// if (error) {
+		// 	alert(error);
+		// 	handleClearError();
+		// }
 	}
 
 	render () {
@@ -99,9 +103,9 @@ class MainBoard extends React.Component<MainBoardProps> {
 								projectSiteName={projectSiteList[respondorContractList[value]['requestorProjectSite'].split('#')[1]]['name']}
 								updateStatus={updateStatus}
 								stepperLabel={'responder'}
-								handleStepNext={updateStatus}
 								title={`Contract Id: ${value}`} 
 								content={respondorContractList[value]} 
+								loading={loading}
 								contentKeys={respondorKeys}/>
 							<div className={classes.seperater} />
 						</div>
@@ -121,11 +125,6 @@ class MainBoard extends React.Component<MainBoardProps> {
 						<Divider />
 					</div>
 				</div>
-				{/* {
-					loading ?
-						<LinearProgress />
-						: null
-				} */}
 				{
 					Object.keys(requestorContractList).map((value, index) => (
 						<div key={index}>
@@ -134,9 +133,9 @@ class MainBoard extends React.Component<MainBoardProps> {
 								projectSiteName={projectSiteList[requestorContractList[value]['respondorProjectSite'].split('#')[1]]['name']}
 								updateStatus={updateStatus}
 								stepperLabel={'requestor'}
-								handleStepNext={updateStatus}
 								title={`Contract Id: ${value}`}
 								content={requestorContractList[value]}
+								loading={loading}
 								contentKeys={requestorKeys} />
 							<div className={classes.seperater} />
 						</div>

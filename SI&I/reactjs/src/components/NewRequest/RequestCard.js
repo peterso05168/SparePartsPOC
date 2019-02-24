@@ -111,7 +111,7 @@ class RequestCard extends React.Component<RequestCardProps> {
 													const projectSiteName = projectSiteList[projectSiteId] ? projectSiteList[projectSiteId]['name']: null;
 													const availableQuantity = sparePartToProjectSiteList[key]? sparePartToProjectSiteList[key]['noOfAvailable']: null;
 													if(!projectSiteId || !projectSiteName || !availableQuantity) {
-														return (<ListItem>
+														return (<ListItem key={key}>
 															<ListItemText inset primary={'Not Avaliable'} />
 														</ListItem>);
 													}

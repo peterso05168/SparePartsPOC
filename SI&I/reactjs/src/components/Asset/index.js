@@ -118,10 +118,10 @@ class Asset extends React.Component<AssetProps> {
 	
 	componentDidUpdate() {
 		const { selectedType, needRefresh, handleClearError, getSelectedTypeAsset, error } = this.props;
-		if (error) {
-			alert(error);
-			handleClearError();
-		}
+		// if (error) {
+		// 	alert(error);
+		// 	handleClearError();
+		// }
 		if (selectedType && needRefresh) {
 			getSelectedTypeAsset('GET', `${selectedType}`);
 		}
