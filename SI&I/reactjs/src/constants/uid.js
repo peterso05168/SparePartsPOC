@@ -5,5 +5,6 @@ export default {
 	SparePartToProjectSite: 'id',
 	UpdateAvailNoOfSparePartToProjSite: 'transactionId',
 	UpdateReqContract: 'transactionId',
-	UpdateRespContract: 'transactionId'
+	UpdateRespContract: 'transactionId',
+	Transaction: 'transactionId'
 };

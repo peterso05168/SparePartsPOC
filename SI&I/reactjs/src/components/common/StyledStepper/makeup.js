@@ -4,7 +4,7 @@ export const styles = theme => ({
 	},
 	stepper: {
 		padding: '0px',
-		backgroundColor: 'inherit'
+		backgroundColor: 'inherit',
 	},
 	progressButton: {
 		marginLeft: '1.3%'
@@ -16,4 +16,9 @@ export const styles = theme => ({
 		// marginTop: theme.spacing.unit,
 		// marginBottom: theme.spacing.unit,
 	},
+	cancelIcon: {
+		marginTop: '-2px',
+		color: '#DA1515',
+		fontSize: '28.8px'
+	}
 });

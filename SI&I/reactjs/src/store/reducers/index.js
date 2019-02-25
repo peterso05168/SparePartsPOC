@@ -6,6 +6,7 @@ import asset 				  	from './asset';
 import login                  	from './login';
 import newRequest 			  	from './newRequest';
 import mainboard 				from './mainboard';
+import snackbar 				from './snackbar';
 
 
 const rootReducer = combineReducers({
@@ -14,7 +15,8 @@ const rootReducer = combineReducers({
 	auth,
 	login,
 	newRequest,
-	mainboard
+	mainboard,
+	snackbar
 });
 
 export default (state, action) => {

@@ -69,3 +69,6 @@ getContract.failure = createAction('GET_CONTRACT_FAILURE', 'error');
 export const postTransaction = createAction('POST_TRANSACTION', 'method', 'path', 'body');
 postTransaction.success = createAction('POST_TRANSACTION_SUCCESS', 'data', 'username');
 postTransaction.failure = createAction('POST_TRANSACTION_FAILURE', 'error');
+
+//snackbar
+export const closeSnackbar = createAction('CLOSE_SNACKBAR');

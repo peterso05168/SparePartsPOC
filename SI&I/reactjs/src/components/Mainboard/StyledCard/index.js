@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import StyledStepper from '../StyledStepper/';
+import StyledStepper from '../../common/StyledStepper';
 
 import { styles } from './makeup.js';
 import { Divider } from '@material-ui/core';
@@ -18,6 +18,7 @@ import { stepperStatus, displayName } from '../../../constants/sampleContract';
 type StyledCardProps = {
 	classes: object,
 	handleOpenCard: (id: string) => any,
+	loading: boolean,
 	title: string,
 	content: object,
 	contentKeys: array,
@@ -49,9 +50,10 @@ class StyledCard extends React.Component<StyledCardProps> {
 		return content[value];
 	}
 
-	handleStepNext = (newStatus, field) => {
+	handleStepNext = (newStatus, field, updateAvaliability, target) => {
+		console.log('update status');
 		const { content, updateStatus } = this.props;
-		const { id } = content;
+		const { id, requestorProjectSite, respondorProjectSite, sparePartId, noOfSparePart } = content;
 		const path = field == 'requestorStatus' ? 'UpdateReqContract' : 'UpdateRespContract';
 		const body = {
 			newStatus,
@@ -59,10 +61,47 @@ class StyledCard extends React.Component<StyledCardProps> {
 		};
 		const method = 'POST';
 		updateStatus(method, path, body);
+
+		if (updateAvaliability) {
+			console.log('update noOfSparePart');
+			const updatePath = 'UpdateAvailNoOfSparePartToProjSite';
+			const noOfAvailable = updateAvaliability == '+' ? noOfSparePart : -noOfSparePart;
+			const projectSite = target == 'requestor' ? requestorProjectSite : respondorProjectSite;
+			const updateBody = {
+				noOfAvailable,
+				projectSite,
+				sparePartId
+			};
+			updateStatus(method, updatePath, updateBody);
+		}
+	}
+
+	handleRejected = (rejectUpdateAvaliability, target) => {
+		const { content, updateStatus } = this.props;
+		const { id, noOfSparePart, requestorProjectSite, respondorProjectSite, sparePartId } = content;
+		const path = 'terminatedContract';
+		const body = {
+			contract: `resource:org.hyperledger_composer.scms.Contract#${id}`,
+		};
+		const method = 'POST';
+		updateStatus(method, path, body);
+
+		if (rejectUpdateAvaliability) {
+			console.log('update rejectnoOfSparePart');
+			const updatePath = 'UpdateAvailNoOfSparePartToProjSite';
+			const noOfAvailable = rejectUpdateAvaliability == '+' ? noOfSparePart : -noOfSparePart;
+			const projectSite = target == 'requestor' ? requestorProjectSite : respondorProjectSite;
+			const updateBody = {
+				noOfAvailable,
+				projectSite,
+				sparePartId
+			};
+			updateStatus(method, updatePath, updateBody);
+		}
 	}
 
 	render() {
-		const { classes, title, content, contentKeys, stepperLabel} = this.props;
+		const { classes, title, content, contentKeys, stepperLabel, loading } = this.props;
 		return (
 			<Card className={classes.card} onClick={() => console.log('aaa')}>
 				<CardContent className={classes.card}>
@@ -79,7 +118,13 @@ class StyledCard extends React.Component<StyledCardProps> {
 					}
 				</CardContent>
 				<CardActions className={classes.cardAction}>
-					<StyledStepper handleStepNext={this.handleStepNext} label={stepperLabel} activeStep={getActiveStep(content)}/>
+					<StyledStepper 
+						handleStepNext={this.handleStepNext} 
+						handleRejected={this.handleRejected}
+						label={stepperLabel} 
+						loading={loading}
+						activeStep={getActiveStep(content)}
+						isTerminated={content.isTerminated == 'Y'}/>
 				</CardActions>
 			</Card>
 		);

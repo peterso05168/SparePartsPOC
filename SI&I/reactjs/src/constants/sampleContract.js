@@ -23,15 +23,18 @@ export const steps = ['Pending', 'Approved',
 export const stepperStatus = {
 	0: {
 		label: '',
+		rejectLabel: '',
 		value: 'P',
 		field: 'requestorStatus',
 		enable: ''
 	},
 	1: {
 		label: 'Approve',
+		rejectLabel: 'Reject',
 		value: 'A',
 		field: 'requestorStatus',
-		enable: 'responder'
+		enable: 'responder',
+		updateAvaliability: '-'
 	},	
 	// 2: {
 	// 	label: 'Sign & Deliver',
@@ -41,32 +44,42 @@ export const stepperStatus = {
 	// },
 	2: {
 		label: 'Comfirm Received',
+		rejectLabel: 'Fail To Receive',
 		value: 'R',
 		field: 'requestorStatus',
-		enable: 'requestor'
+		enable: 'requestor',
+		updateAvaliability: '+'
 	},
 	3: {
 		label: 'Finish Test',
+		rejectLabel: 'Fail',
 		value: 'T',
 		field: 'requestorStatus',
-		enable: 'requestor'
+		enable: 'requestor',
+		rejectUpdateAvaliability: '-'
 	},
 	4: {
 		label: 'Arrange and Deliver',
+		rejectLabel: '',
 		value: 'A',
 		field: 'respondorStatus',
-		enable: 'requestor'
+		enable: 'requestor',
+		updateAvaliability: '-'
 	},
 	5: {
 		label: 'Comfirm Received',
+		rejectLabel: 'Failed to receive',
 		value: 'R',
 		field: 'respondorStatus',
-		enable: 'responder'
+		enable: 'responder',
+		updateAvaliability: '+'
 	},
 	6: {
 		label: 'Finish Test',
+		rejectLabel: 'Fail',
 		value: 'T',
 		field: 'respondorStatus',
-		enable: 'responder'
+		enable: 'responder',
+		rejectUpdateAvaliability: '-'
 	}
 };

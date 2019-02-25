@@ -8,6 +8,10 @@ import Navbar from './Navbar';
 
 import Mainboard from './Mainboard';
 import NewRequest from './NewRequest/';
+import StyledSnackbar from './common/StyledSnackbar';
+import { connect } from 'react-redux';
+
+import { selectProps, selectActions } from '../store/selectors/snackbar';
 
 const styles = theme => ({
 	root: {
@@ -26,9 +30,11 @@ const styles = theme => ({
 	},
 });
 
-class Main extends PureComponent<any> {
+const connector = connect(selectProps, selectActions);
+
+class Dashboard extends PureComponent<any> {
 	render() {
-		const { classes } = this.props;
+		const { classes, open, message, closeSnackbar } = this.props;
 		return (
 			<div className={classes.root}>
 				<Navbar />
@@ -41,9 +47,10 @@ class Main extends PureComponent<any> {
 						<Route path="/newRequest" component={NewRequest} />
 					</Switch>
 				</main>
+				<StyledSnackbar open={open} message={message} closeSnackbar={closeSnackbar}/>
 			</div>
 		);
 	}
 }
 
-export default withStyles(styles)(Main);
+export default withStyles(styles)(connector(Dashboard));

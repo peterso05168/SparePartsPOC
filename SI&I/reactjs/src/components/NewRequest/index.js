@@ -70,6 +70,7 @@ class NewRequest extends React.Component<NewRequestProps> {
 			'requestorStatus': 'P',
 			'respondorStatus': 'N',
 			'amiToken': 'N',
+			'isTerminated': 'N',
 			'paymentToRespondor': 'N',
 			'requestorProjectSite': `resource:org.hyperledger_composer.scms.ProjectSite#${username}`,
 			'respondorProjectSite': `resource:org.hyperledger_composer.scms.ProjectSite#${selectedProjectSite}`
@@ -84,10 +85,10 @@ class NewRequest extends React.Component<NewRequestProps> {
 
 	componentDidUpdate () {
 		const { error, handleClearError } = this.props;
-		if (error) {
-			alert(error);
-			handleClearError();
-		}
+		// if (error) {
+		// 	alert(error);
+		// 	handleClearError();
+		// }
 	}
 
 	render () {
